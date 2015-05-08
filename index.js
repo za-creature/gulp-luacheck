@@ -35,6 +35,15 @@ function isResultFailure(msg) {
 
 }
 
+function isResultSyntaxError(msg) {
+
+    msg = msg.replace("\r", '');
+    var len = msg.length;
+    return msg.substring(len - 12).toLowerCase() === "syntax error";
+
+}
+
+
 function processLines(lines, filePath) {
 
     var errLines = [];
@@ -85,7 +94,7 @@ function check(file, opts, callback) {
         lines.shift();
 
         // Not okay and an error we know how to deal with
-        if (!isResultOk(msg) && isResultFailure(msg)) {
+        if (!isResultOk(msg) && (isResultFailure(msg) || isResultSyntaxError(msg))) {
 
             logRed('[gulp-luacheck] Issue in "' + filePath + '"');
 
