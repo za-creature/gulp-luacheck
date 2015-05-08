@@ -1,0 +1,16 @@
+{
+  "name": "gulp-luacheck",
+  "version": "0.1.0",
+  "description": "luacheck for Gulp",
+  "author": "Sean Monahan <sean@seanmonahan.org>",
+  "license": "MIT",
+  "main": "",
+  "dependencies": {
+    "gulp-util": "^3.0.1",
+    "through2": "^0.6.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NoobsArePeople2/gulp-luacheck.git"
+  }
+}
