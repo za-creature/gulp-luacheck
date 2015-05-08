@@ -84,44 +84,55 @@ function check(file, opts, callback) {
 
     cmd += filePath;
 
-    exec(cmd, function(err, stdout, stderr) {
+    exec('luacheck --help', function(err, stdout, stderr) {
 
-        // Grab the first line of stdout which ends
-        // in either "OK" if everything is clean or
-        // "Failure" if something is amiss.
-        var lines = stdout.split("\n");
-        var msg = lines[0];
-        lines.shift();
-
-        // Not okay and an error we know how to deal with
-        if (!isResultOk(msg) && (isResultFailure(msg) || isResultSyntaxError(msg))) {
-
-            logRed('[gulp-luacheck] Issue in "' + filePath + '"');
-
-            var errLines = processLines(lines, filePath);
-
-            errLines.forEach(function(line, index, arr) {
-
-                logYellow('  ' + line);
-
-            });
-
-            err = null;
-        }
-
-        // Something else went sideways
         if (err) {
-            return callback(new PluginError(PLUGIN_NAME, err.message,
-            {
-                fileName: filePath,
-                lineNumber: 0,
-                stack: err.stack
-            }));
+            logRed("[gulp-luacheck] YOU MUST INSTALL luacheck TO RUN THIS PLUGIN. See 'https://github.com/mpeterv/luacheck' for installation instructions.")
+            callback(null);
+            return;
         }
 
-        callback(null);
+        exec(cmd, function(err, stdout, stderr) {
+
+            // Grab the first line of stdout which ends
+            // in either "OK" if everything is clean or
+            // "Failure" if something is amiss.
+            var lines = stdout.split("\n");
+            var msg = lines[0];
+            lines.shift();
+
+            // Not okay and an error we know how to deal with
+            if (!isResultOk(msg) && (isResultFailure(msg) || isResultSyntaxError(msg))) {
+
+                logRed('[gulp-luacheck] Issue in "' + filePath + '"');
+
+                var errLines = processLines(lines, filePath);
+
+                errLines.forEach(function(line, index, arr) {
+
+                    logYellow('  ' + line);
+
+                });
+
+                err = null;
+            }
+
+            // Something else went sideways
+            if (err) {
+                return callback(new PluginError(PLUGIN_NAME, err.message,
+                {
+                    fileName: filePath,
+                    lineNumber: 0,
+                    stack: err.stack
+                }));
+            }
+
+            callback(null);
+
+        });
 
     });
+
 
 }
 
