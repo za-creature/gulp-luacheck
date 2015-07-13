@@ -36,7 +36,7 @@ processLines = (lines, filePath) ->
     )
 
 
-check = (file, opts, callback) ->
+check = (file, opts, next) ->
     exec = require("child_process").exec
     runs = 0
 
@@ -56,7 +56,7 @@ check = (file, opts, callback) ->
             logRed("[gulp-luacheck] YOU MUST INSTALL luacheck TO RUN THIS
                     PLUGIN. See https://github.com/mpeterv/luacheck for
                     installation instructions.")
-            callback(null)
+            next(null)
             return
 
         exec cmd, (err, stdout, stderr) ->
@@ -73,7 +73,6 @@ check = (file, opts, callback) ->
                 logRed("[gulp-luacheck] Issue in '#{filePath}'")
 
                 errLines = processLines(lines, filePath)
-
                 errLines.forEach (line, index, arr) ->
                     logYellow("  " + line)
 
@@ -81,13 +80,13 @@ check = (file, opts, callback) ->
 
             # Something else went sideways
             if err
-                return callback(new PluginError(PLUGIN_NAME, err.message,
+                return next(new PluginError(PLUGIN_NAME, err.message,
                     fileName: filePath,
                     lineNumber: 0,
                     stack: err.stack
                 ))
 
-            callback(null)
+            next(null)
 
 
 module.exports = (opts) ->
@@ -95,12 +94,12 @@ module.exports = (opts) ->
     opts.config = opts.config or ""
     opts.noConfig = opts.noConfig or false
 
-    luacheck = (file, encoding, callback) ->
+    through.obj (file, encoding, next) ->
         if file.isNull()
-            return callback(null, file)
+            return next(null, file)
 
         if file.isStream()
-            return callback(new PluginError(
+            return next(new PluginError(
                 PLUGIN_NAME,
                 "Streaming is not supported", {
                     fileName: file.path,
@@ -109,8 +108,6 @@ module.exports = (opts) ->
 
         check file, opts, (err) ->
             if err
-                return callback(err)
+                return next(err)
 
-            callback(null, file)
-
-    through.obj(luacheck)
+            next(null, file)
