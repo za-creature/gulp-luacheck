@@ -1,3 +1,4 @@
+{exec}      = require "child_process"
 gutil       = require "gulp-util"
 path        = require "path"
 PluginError = require "gulp-util/lib/PluginError"
@@ -37,7 +38,6 @@ processLines = (lines, filePath) ->
 
 
 check = (file, opts, next) ->
-    exec = require("child_process").exec
     runs = 0
 
     filePath = file.path
