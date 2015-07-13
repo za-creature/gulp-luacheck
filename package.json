@@ -1,16 +1,44 @@
 {
   "name": "gulp-luacheck",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "luacheck for Gulp",
+  "keywords": [
+    "gulp",
+    "lint",
+    "luacheck"
+  ],
   "author": "Sean Monahan <sean@seanmonahan.org>",
+  "contributors": [
+    "Radu Dan <za_creature@yahoo.com> (https://github.com/za-creature)"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/za-creature/gulp-luacheck.git"
+  },
+  "bugs": {
+    "url": "https://github.com/za-creature/gulp-luacheck/issues"
+  },
+  "homepage": "https://github.com/za-creature/gulp-luacheck/issues",
   "license": "MIT",
-  "main": "",
+  "main": "lib",
+  "scripts": {
+    "prepublish": "coffee -o lib -c src",
+    "test": "mocha --options mocha.opts tests"
+  },
+  "files": [
+    "lib"
+  ],
   "dependencies": {
     "gulp-util": "^3.0.1",
     "through2": "^0.6.3"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/NoobsArePeople2/gulp-luacheck.git"
+  "devDependencies": {
+    "coffee-script": "^1.9.3",
+    "mocha": "^2.2.5"
+  },
+  "engines": {
+    "npm": "*",
+    "node": "*",
+    "coffee-script": "^1.9.3"
   }
 }
