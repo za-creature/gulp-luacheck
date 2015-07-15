@@ -1,6 +1,6 @@
 {
   "name": "gulp-luacheck",
-  "version": "0.2.0",
+  "version": "0.9",
   "description": "luacheck for Gulp",
   "keywords": [
     "gulp",
@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/za-creature/gulp-luacheck/issues"
   },
-  "homepage": "https://github.com/za-creature/gulp-luacheck/issues",
+  "homepage": "https://github.com/za-creature/gulp-luacheck",
   "license": "MIT",
   "main": "lib",
   "scripts": {
@@ -30,6 +30,7 @@
   ],
   "dependencies": {
     "gulp-util": "^3.0.1",
+    "luacheck": "^0.1.0",
     "through2": "^0.6.3"
   },
   "devDependencies": {
