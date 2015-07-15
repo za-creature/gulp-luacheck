@@ -24,7 +24,7 @@ module.exports = (options) ->
             next(new PluginError(PLUGIN_NAME, err, "fileName": file.path))
 
 
-module.exports.reporter = (name, options) ->
+module.exports.reporter = (name="default", options) ->
     if typeof reporters[name] isnt "undefined"
         # bundled
         ctor = reporters[name]
