@@ -43,7 +43,6 @@ reporter is also bundled:
     gulp.src("**/*.lua")
         .pipe(luacheck())
         .pipe(luacheck.reporter("stylish"))
-});
 ```
 
 By default errors are not fatal (so as to not break the stream when using
@@ -56,7 +55,6 @@ reporter (also bundled):
         .pipe(luacheck())
         .pipe(luacheck.reporter())
         .pipe(luacheck.reporter("fail"))
-});
 ```
 
 ## License
