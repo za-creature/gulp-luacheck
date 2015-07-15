@@ -1,5 +1,5 @@
-through = require "through2"
 path = require "path"
+through = require "through2"
 
 
 module.exports = (options) ->

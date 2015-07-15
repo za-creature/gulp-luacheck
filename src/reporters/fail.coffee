@@ -1,5 +1,5 @@
-through = require "through2"
 {PluginError} = require "gulp-util"
+through = require "through2"
 
 
 PLUGIN_NAME = "gulp-luacheck"
