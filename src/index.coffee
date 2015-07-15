@@ -22,3 +22,14 @@ module.exports = (options) ->
             next(null, file)
         catch err
             next(new PluginError(PLUGIN_NAME, err, "fileName": file.path))
+
+
+module.exports.reporter = (name, options) ->
+    if typeof reporters[name] isnt "undefined"
+        # bundled
+        ctor = reporters[name]
+    else
+        # third party
+        ctor = require("luacheck-#{name}")
+
+    ctor(options)
