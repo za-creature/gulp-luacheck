@@ -41,7 +41,7 @@ reporter is also bundled:
 
 ```javascript
     gulp.src("**/*.lua")
-        .pipe(luacheck)
+        .pipe(luacheck())
         .pipe(luacheck.reporter("stylish"))
 });
 ```
@@ -53,7 +53,7 @@ reporter (also bundled):
 
 ```javascript
     gulp.src("**/*.lua")
-        .pipe(luacheck)
+        .pipe(luacheck())
         .pipe(luacheck.reporter())
         .pipe(luacheck.reporter("fail"))
 });
