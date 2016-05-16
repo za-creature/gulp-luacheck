@@ -1,6 +1,6 @@
 {
   "name": "gulp-luacheck",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "luacheck for Gulp",
   "keywords": [
     "gulp",
