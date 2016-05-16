@@ -18,7 +18,7 @@ npm install gulp-luacheck
 
 ```javascript
 var gulp = require("gulp");
-var luacheck = require("luacheck");
+var luacheck = require("gulp-luacheck");
 var options = {};
 
 
